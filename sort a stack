@@ -1,0 +1,41 @@
+SOLUTION 1.)
+====================================>
+Recursive 
+---------------------
+
+
+class Solution:
+    def insert(self,s, temp):
+        if len(s) == 0 or temp > s[-1]:
+            s.append(temp)
+            return
+        else:
+            p = s.pop()
+            self.insert(s, temp)
+            s.append(p)
+    
+    def sorted(self, s):
+        
+        if s:
+            temp = s.pop()
+            self.sorted(s)
+            self.insert(s, temp)
+            
+            
+SOLUTION 2.)
+===================================>
+class Solution:
+    def sorted(self, s):
+    
+        tempStack = []
+        
+        while len(s) > 0:
+            temp = s.pop()
+            while len(tempStack) > 0 and tempStack[-1] > temp:
+                s.append(tempStack.pop())
+            tempStack.append(temp)
+        
+        while len(tempStack) > 0:
+            s.append(tempStack.pop())
+        s.reverse()
+            
