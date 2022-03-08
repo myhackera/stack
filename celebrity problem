@@ -1,0 +1,15 @@
+class Solution:
+    def celebrity(self, M, n):
+        
+         i = n-1
+         j = 0
+         while i >= 0 and j < n:
+
+             if M[i][j]:
+                 i -= 1
+             else:
+                 j += 1
+                 if j > n-1:
+                     return i
+                
+         return -1 
