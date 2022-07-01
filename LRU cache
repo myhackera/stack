@@ -1,0 +1,83 @@
+Using dictionary
+================>>>
+
+from sys import stdin
+from collections import OrderedDict
+class LRUCache:
+    def __init__(self, capacity):
+        self.cache = OrderedDict()
+        self.capacity = capacity
+        
+    def get(self, key):
+        if key not in self.cache:
+            return -1
+        else:
+            self.cache.move_to_end(key)
+            return self.cache[key]
+        
+    def put(self, key, value):
+        self.cache[key] = value
+        self.cache.move_to_end(key)
+        if len(self.cache) > self.capacity:
+            self.cache.popitem(last=False)
+            
+Using Linked List
+=================>>>
+
+class Node:
+    def __init__(self, k, v):
+        self.key = k
+        self.value = v
+        self.next = None
+        self.prev = None
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.d = {}
+        
+        self.head = Node(0, 0)
+        self.tail = Node(0, 0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        
+
+    def get(self, key: int) -> int:
+        if key in self.d:
+            n = self.d[key]
+            self.remove(n)
+            self.add(n)
+            return n.value
+        else:
+            return -1
+        
+        
+    def add(self, node):
+        p = self.tail.prev
+        p.next = node
+        self.tail.prev = node
+        node.prev = p
+        node.next = self.tail
+        
+    def remove(self, node):
+        p = node.prev
+        n = node.next
+        p.next = n
+        n.prev = p
+            
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.d:
+            self.remove(self.d[key])
+        n = Node(key, value)
+        self.add(n)
+        self.d[key] = n
+        if len(self.d) > self.capacity:
+            n = self.head.next
+            self.remove(n)
+            del self.d[n.key]
+            
+        
+        
+            
