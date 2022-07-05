@@ -1,15 +1,26 @@
 class Solution:
+    
+    #Function to find if there is a celebrity in the party or not.
     def celebrity(self, M, n):
         
-         i = n-1
-         j = 0
-         while i >= 0 and j < n:
+	    i = n-1
+        j = 0
+        
+        while i >= 0 and j < n:
 
-             if M[i][j]:
-                 i -= 1
-             else:
-                 j += 1
-                 if j > n-1:
-                     return i
-                
-         return -1 
+            if M[i][j]:
+                i -= 1
+            else:
+                j += 1
+        
+        # Now at last check that whether the candidate is actually a celebrity by re-running a 
+        #loop from 0 to n-1  and constantly checking that if the candidate knows a person or if 
+        # here is a candidate who does not know the candidate
+        
+        candidate = i
+        for k in range(n):
+            if k != candidate:
+                if M[candidate][k] == 1 or M[k][candidate] == 0:
+                    return -1
+        return candidate
+
