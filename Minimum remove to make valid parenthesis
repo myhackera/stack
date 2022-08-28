@@ -1,0 +1,31 @@
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        
+        ans = ""
+        open = close = 0
+        
+        for i in range(len(s)):
+            if s[i] == "(":
+                open += 1
+            elif s[i] == ")":
+                close += 1 
+            if open >= close:
+                ans += s[i]
+            else:
+                close -= 1
+            
+        
+        final_ans = ""
+        open = close = 0
+        
+        for i in range(len(ans)-1, -1, -1):
+            if ans[i] == "(":
+                open += 1
+            elif ans[i] == ")":
+                close += 1
+            if close >= open:
+                final_ans += ans[i]
+            else:
+                open -= 1
+                
+        return final_ans[::-1]
