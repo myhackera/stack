@@ -1,0 +1,29 @@
+class Solution:
+    def nextGreaterElements(self, arr: List[int]) -> List[int]:
+        
+#         n = len(arr)
+#         narr = arr+arr
+#         ans = [-1]*n
+        
+#         for i in range(len(arr)):
+#             for j in range(i+1, len(narr)):
+#                 if narr[j] > arr[i]:
+#                     ans[i] = narr[j]
+#                     break
+                    
+#         return ans
+
+        n = len(arr)
+        res = [-1]*n
+        st = []
+        
+        for _ in range(2):
+            for i in range(n-1, -1, -1):
+                
+                while st and st[-1] <= arr[i]:
+                    st.pop()
+                if len(st) > 0:
+                    res[i] = st[-1]
+                st.append(arr[i])
+                
+        return res
