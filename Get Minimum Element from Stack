@@ -1,0 +1,28 @@
+import sys
+class stack:
+    def __init__(self):
+        
+        self.s=[]
+        self.minele=sys.maxsize
+        self.prevmins = []
+        
+    def push(self,x):
+        
+        self.s.append(x)
+        if self.minele >= x:
+            self.prevmins.append(self.minele)
+            self.minele = x
+            
+    
+    def pop(self):
+        
+        if not self.s:
+            return -1
+        if self.s[-1] == self.minele:
+            self.minele = self.prevmins.pop()
+        return self.s.pop()
+        
+            
+    def getMin(self):
+        
+        return self.minele if self.minele != sys.maxsize else -1
